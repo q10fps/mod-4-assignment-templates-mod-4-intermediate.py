@@ -73,6 +73,7 @@ def caesar_cipher(message, shift):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     encrypted = ""
     
+    
     for letter in message:
         shifted = shift_letter(letter,shift)
         encrypted += shifted
@@ -151,28 +152,23 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    key = ''.join(c for c in key.lower() if c.isalpha())
-  
-  # Extend the keyphrase to match the length of the message
-    key *= len(message) // len(key)
-    key += key[:(len(message) - len(key)) % len(key)]
+    encrypted = ""
 
-    encrypted_message = ""
-  
-  # Loop over the characters in the message
-    for i, c in enumerate(message):
-    # Ignore characters that are not letters
-        if not c.isalpha():
-            encrypted_message += c
+    # Create an extended key by repeating the key as many times as needed to match the length of the message
+    extended_key = (key * (len(message) // len(key) + 1))[:len(message)]
+
+    # Shift each letter in the message by the number represented by the corresponding letter in the extended key
+    for i in range(len(message)):
+        letter = message[i]
+        
+        # If the letter is a space, add a space to the result string and continue to the next letter
+        if letter == " ":
+            encrypted += " "
             continue
-      
-        ascii_code = ord(c)
-        ascii_code += ord(key[i]) - ord('a')
-        if ascii_code > ord('z'):
-            ascii_code -= 26
-        elif ascii_code < ord('a'):
-            ascii_code += 26
-        shifted_letter = chr(ascii_code)
-    
-        encrypted_message += shifted_letter
-    return encrypted_message
+        
+        key_letter = extended_key[i]
+        shifted = shift_by_letter(letter, key_letter)
+        result += shifted
+
+    # Return the shifted message
+    return encrypted
