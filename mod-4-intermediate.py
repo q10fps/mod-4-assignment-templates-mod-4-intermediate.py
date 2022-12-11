@@ -107,6 +107,9 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+    if letter == "":
+        return ""
+    
     letter = letter.lower()
     letter_shift = letter_shift.lower()
   
@@ -120,7 +123,7 @@ def shift_by_letter(letter, letter_shift):
     
     shifted_letter = shifted_letter.upper()
     return shifted_letter
-
+    
 def vigenere_cipher(message, key):
     '''Vigenere Cipher. 
     6 points.
