@@ -71,26 +71,12 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    encrypted_message = ""
+    encrypted = ""
     
-    message = message.upper()
-  
-    encrypted_message = ""
-
-    for char in message:
-
-        if char.isalpha():
-            ascii_code = ord(char)
-            ascii_code += shift
-            if ascii_code > ord('Z'):
-                ascii_code -= 26
-            elif ascii_code < ord('A'):
-                ascii_code += 26
-            encrypted_char = chr(ascii_code)
-        else:
-            encrypted_char = char
-        encrypted_message += encrypted_char
-    return encrypted_message
+    for letter in message:
+        shifted = shift_letter(letter,shift)
+        encrypted += shifted
+    return (encrypted)
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter. 
@@ -171,9 +157,6 @@ def vigenere_cipher(message, key):
     key *= len(message) // len(key)
     key += key[:(len(message) - len(key)) % len(key)]
 
-    print("Message:", message)
-    print("Key:", key)
-    
     encrypted_message = ""
   
   # Loop over the characters in the message
